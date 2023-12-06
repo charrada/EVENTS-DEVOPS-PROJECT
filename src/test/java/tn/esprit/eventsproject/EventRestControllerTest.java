@@ -35,14 +35,30 @@ class EventRestControllerTest {
 
     @Test
     void addEvent() {
-        Event event = new Event();
-        event.setIdEvent(1);
-        when(eventServices.addAffectEvenParticipant(Mockito.any())).thenReturn(event);
-        Event result = eventRestController.addEvent(new Event());
+
+        Event eventRequest = new Event();
+        eventRequest.setDescription("Test Event");
+        eventRequest.setDateDebut(LocalDate.of(2024, 5, 12));
+        eventRequest.setDateFin(LocalDate.of(2024, 6, 15));
+        eventRequest.setCout(100);
+
+
+        when(eventServices.addAffectEvenParticipant(Mockito.any())).thenReturn(eventRequest);
+
+
+        Event result = eventRestController.addEvent(eventRequest);
+
+
         assertNotNull(result);
-        assertEquals(1, result.getIdEvent());
+        assertEquals("Test Event", result.getDescription());
+        assertEquals(LocalDate.of(2023, 1, 1), result.getDateDebut());
+        assertEquals(LocalDate.of(2023, 1, 5), result.getDateFin());
+        assertEquals(100, result.getCout());
+
         verify(eventServices).addAffectEvenParticipant(Mockito.any());
+
         System.err.println("addEvent: SUCCESS");
     }
+
 
 }
