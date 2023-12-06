@@ -35,7 +35,6 @@ class EventRestControllerTest {
 
     @Test
     void addEvent() {
-
         Event eventRequest = new Event();
         eventRequest.setDescription("Test Event");
         eventRequest.setDateDebut(LocalDate.of(2024, 5, 12));
@@ -51,13 +50,32 @@ class EventRestControllerTest {
 
         assertNotNull(result);
         assertEquals("Test Event", result.getDescription());
-        assertEquals(LocalDate.of(2023, 1, 1), result.getDateDebut());
-        assertEquals(LocalDate.of(2023, 1, 5), result.getDateFin());
+        assertEquals(LocalDate.of(2024, 5, 12), result.getDateDebut());
+        assertEquals(LocalDate.of(2024, 6, 15), result.getDateFin());
         assertEquals(100, result.getCout());
 
         verify(eventServices).addAffectEvenParticipant(Mockito.any());
 
         System.err.println("addEvent: SUCCESS");
+    }
+
+
+    @Test
+    void addEventPart() {
+        Event event = new Event();
+        event.setIdEvent(1);
+
+        int participantId = 123;
+        when(eventServices.addAffectEvenParticipant(Mockito.any(), Mockito.eq(participantId))).thenReturn(event);
+
+        Event result = eventRestController.addEventPart(new Event(), participantId);
+
+        assertNotNull(result);
+        assertEquals(1, result.getIdEvent());
+        System.err.println("addEventPart: SUCCESS");
+
+
+        verify(eventServices).addAffectEvenParticipant(Mockito.any(), Mockito.eq(participantId));
     }
 
 
