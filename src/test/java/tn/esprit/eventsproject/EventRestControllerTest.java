@@ -112,4 +112,24 @@ class EventRestControllerTest {
         System.err.println("getLogistiquesDates: SUCCESS");
     }
 
+    @Test
+    void addParticipant() {
+        Participant participant = new Participant();
+        participant.setIdPart(1);
+        when(eventServices.addParticipant(Mockito.any())).thenReturn(participant);
+
+        Participant result = eventRestController.addParticipant(new Participant());
+
+        assertNotNull(result);
+        assertEquals(1, result.getIdPart());
+        System.err.println("addParticipant: SUCCESS");
+
+        verify(eventServices).addParticipant(Mockito.any());
+    }
+
+    @AfterAll
+    static void displaySuccessMessage() {
+        System.out.println("All tests succeeded");
+    }
+
 }
