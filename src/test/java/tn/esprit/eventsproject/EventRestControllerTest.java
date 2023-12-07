@@ -78,5 +78,22 @@ class EventRestControllerTest {
         verify(eventServices).addAffectEvenParticipant(Mockito.any(), Mockito.eq(participantId));
     }
 
+    @Test
+    void addAffectLog() {
+        Logistics logistics = new Logistics();
+        logistics.setIdLog(1);
+        String descriptionEvent = "SampleEvent";
+        when(eventServices.addAffectLog(Mockito.any(), Mockito.eq(descriptionEvent))).thenReturn(logistics);
 
+        Logistics result = eventRestController.addAffectLog(new Logistics(), descriptionEvent);
+
+        assertNotNull(result);
+        assertEquals(1, result.getIdLog());
+        System.err.println("addAffectLog: SUCCESS");
+
+
+        verify(eventServices).addAffectLog(Mockito.any(), Mockito.eq(descriptionEvent));
+    }
+
+    
 }
