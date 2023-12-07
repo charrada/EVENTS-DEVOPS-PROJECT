@@ -95,5 +95,21 @@ class EventRestControllerTest {
         verify(eventServices).addAffectLog(Mockito.any(), Mockito.eq(descriptionEvent));
     }
 
-    
+    @Test
+    void getLogistiquesDates() {
+        LocalDate dateDebut = LocalDate.now();
+        LocalDate dateFin = LocalDate.now().plusDays(1);
+        Logistics logistics = new Logistics();
+        logistics.setIdLog(1);
+        List<Logistics> expectedLogistics = Arrays.asList(logistics);
+        when(eventServices.getLogisticsDates(dateDebut, dateFin)).thenReturn(expectedLogistics);
+
+        List<Logistics> result = eventRestController.getLogistiquesDates(dateDebut, dateFin);
+
+        assertNotNull(result);
+        assertEquals(expectedLogistics.size(), result.size());
+        assertEquals(expectedLogistics.get(0).getIdLog(), result.get(0).getIdLog());
+        System.err.println("getLogistiquesDates: SUCCESS");
+    }
+
 }
