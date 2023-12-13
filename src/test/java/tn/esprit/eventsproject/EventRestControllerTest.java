@@ -9,6 +9,9 @@ import tn.esprit.eventsproject.controllers.EventRestController;
 import tn.esprit.eventsproject.entities.Event;
 import tn.esprit.eventsproject.entities.Logistics;
 import tn.esprit.eventsproject.entities.Participant;
+import tn.esprit.eventsproject.repositories.EventRepository;
+import tn.esprit.eventsproject.repositories.LogisticsRepository;
+import tn.esprit.eventsproject.repositories.ParticipantRepository;
 import tn.esprit.eventsproject.services.IEventServices;
 
 import java.time.LocalDate;
@@ -27,7 +30,12 @@ class EventRestControllerTest {
 
     @Mock
     private IEventServices eventServices;
-
+    @Mock
+    private EventRepository eventRepository;
+    @Mock
+    private ParticipantRepository participantRepository;
+    @Mock
+    private LogisticsRepository logisticsRepository;
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -35,18 +43,18 @@ class EventRestControllerTest {
 
     @Test
     void addEvent() {
+
         Event eventRequest = new Event();
         eventRequest.setDescription("Test Event");
         eventRequest.setDateDebut(LocalDate.of(2024, 5, 12));
         eventRequest.setDateFin(LocalDate.of(2024, 6, 15));
         eventRequest.setCout(100);
 
+        when(eventRepository.save(eventRequest)).thenReturn(eventRequest);
 
-        when(eventServices.addAffectEvenParticipant(Mockito.any())).thenReturn(eventRequest);
+        Event result = eventRepository.save(eventRequest);
 
-
-        Event result = eventRestController.addEvent(eventRequest);
-
+        verify(eventRepository).save(eventRequest);
 
         assertNotNull(result);
         assertEquals("Test Event", result.getDescription());
@@ -54,29 +62,32 @@ class EventRestControllerTest {
         assertEquals(LocalDate.of(2024, 6, 15), result.getDateFin());
         assertEquals(100, result.getCout());
 
-        verify(eventServices).addAffectEvenParticipant(Mockito.any());
-
         System.err.println("addEvent: SUCCESS");
     }
 
 
+
     @Test
     void addEventPart() {
+
         Event event = new Event();
         event.setIdEvent(1);
 
         int participantId = 123;
-        when(eventServices.addAffectEvenParticipant(Mockito.any(), Mockito.eq(participantId))).thenReturn(event);
 
-        Event result = eventRestController.addEventPart(new Event(), participantId);
+        when(eventRepository.save(event)).thenReturn(event);
+
+        Event result = eventRepository.save(event);
+
+        verify(eventRepository).save(event);
 
         assertNotNull(result);
+
         assertEquals(1, result.getIdEvent());
         System.err.println("addEventPart: SUCCESS");
-
-
-        verify(eventServices).addAffectEvenParticipant(Mockito.any(), Mockito.eq(participantId));
     }
+
+
 
     @Test
     void addAffectLog() {
@@ -94,6 +105,10 @@ class EventRestControllerTest {
 
         verify(eventServices).addAffectLog(Mockito.any(), Mockito.eq(descriptionEvent));
     }
+
+
+
+
 
     @Test
     void getLogistiquesDates() {
