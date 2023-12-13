@@ -32,10 +32,7 @@ class EventRestControllerTest {
     private IEventServices eventServices;
     @Mock
     private EventRepository eventRepository;
-    @Mock
-    private ParticipantRepository participantRepository;
-    @Mock
-    private LogisticsRepository logisticsRepository;
+  
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
