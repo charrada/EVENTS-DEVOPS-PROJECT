@@ -33,3 +33,10 @@ Voici les étapes clés que j'ai suivies pour assurer le déploiement réussi :
 
 ## Voici les étapes clés que j'ai suivies pour assurer le déploiement réussi : 
 Compétences : Jenkins · Sonarqube · Nexus · JUnit · graphana · prometheus · DevOps · Docker
+![1](https://github.com/charrada/EVENTS-DEVOPS-PROJECT/assets/61417722/ca2df29a-2bbe-4fb8-931c-d88e05bcaf64)
+![Pipleline Dockerlocal to DockerHub](https://github.com/charrada/EVENTS-DEVOPS-PROJECT/assets/61417722/4fd3de29-ad8e-4196-b1fc-10eef10e0171)
+![4](https://github.com/charrada/EVENTS-DEVOPS-PROJECT/assets/61417722/66e3743d-406b-43a0-b2b7-b5dbbc093393)
+![5](https://github.com/charrada/EVENTS-DEVOPS-PROJECT/assets/61417722/4b9ce2cb-a0e5-4699-85ab-1a227a121934)
+![2](https://github.com/charrada/EVENTS-DEVOPS-PROJECT/assets/61417722/bb077e02-d3b3-43fb-aab2-7db391c3146d)
+![3](https://github.com/charrada/EVENTS-DEVOPS-PROJECT/assets/61417722/1dfeb942-eebc-4365-938b-f86d05d1ba4b)
+
